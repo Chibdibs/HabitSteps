@@ -1,0 +1,32 @@
+<h1>Dashboard</h1>
+<p>Current Streak: {{ profile.current_streak }}</p>
+<p>Longest Streak: {{ profile.longest_streak }}</p>
+<p>Total Points: {{ profile.total_points }}</p>
+
+<h2>Progress This Week</h2>
+<canvas id="progressChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('progressChart').getContext('2d');
+    var progressChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ dates | safe }},
+            datasets: [{
+                label: 'Completion Rate',
+                data: {{ completion_rates | safe }},
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100
+                }
+            }
+        }
+    });
+</script>
