@@ -18,10 +18,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', lambda request: redirect('dashboard/')),  # Redirect root to dashboard
+    path('', TemplateView.as_view(template_name='landing.html'), name='landing'),  # Serve the landing page
+    path('dashboard/', login_required(TemplateView.as_view(template_name='dashboard.html')), name='dashboard'),
     path('', include('habits.urls')),
+]
+
+
+urlpatterns += [
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
 

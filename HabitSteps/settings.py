@@ -124,3 +124,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# HabitSteps/settings.py
+LOGIN_URL = '/'  # Redirect to landing page if not logged in
+LOGIN_REDIRECT_URL = '/dashboard/'  # Redirect to dashboard after login

@@ -1,0 +1,8 @@
+<!-- templates/login.html -->
+<h1>Login to HabitSteps</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+<p>Don't have an account? <a href="{% url 'register' %}">Sign up</a></p>
